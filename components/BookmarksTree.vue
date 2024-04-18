@@ -86,7 +86,7 @@
 import {useRouter} from "vue-router";
 import {onMounted, PropType, ref, watch, watchEffect} from "vue";
 import {useQuasar} from "quasar";
-import {useBookmarksStore} from "src/stores/bookmarksStore";
+import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
 import {useNotificationsStore} from "src/stores/notificationsStore";
 import {useNotificationHandler} from "src/services/ErrorHandler";
 import {useSettingsStore} from "src/stores/settingsStore"
