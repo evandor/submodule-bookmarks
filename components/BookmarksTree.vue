@@ -36,8 +36,8 @@
         node-key="id"
         @mouseenter="entered(true)"
         @mouseleave="entered(false)"
-        v-model:selected="selected"
-        v-model:expanded="useNotificationsStore().bookmarksExpanded">
+        v-model:selected="selected">
+<!--        v-model:expanded="useNotificationsStore().bookmarksExpanded">-->
       <template v-slot:header-node="prop">
         <q-icon name="o_folder" color="warning" class="q-mr-sm"/>
         <span class="cursor-pointer fit no-wrap ellipsis">{{ prop.node.label }}
@@ -86,9 +86,6 @@ import {useRouter} from "vue-router";
 import {onMounted, PropType, ref, watch, watchEffect} from "vue";
 import {useQuasar} from "quasar";
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
-import {useNotificationsStore} from "src/stores/notificationsStore";
-import {useNotificationHandler} from "src/services/ErrorHandler";
-import {useSettingsStore} from "src/stores/settingsStore"
 import NavigationService from "src/services/NavigationService";
 import DeleteBookmarkFolderDialog from "src/bookmarks/dialogues/DeleteBookmarkFolderDialog.vue";
 import {TreeNode} from "src/models/Tree";
@@ -131,11 +128,6 @@ watchEffect(() => {
   bmsCount.value = bookmarksStore.bookmarksCount
 })
 
-watchEffect(() => {
-  expandedBookmarks.value = useNotificationsStore().bookmarksExpanded
-  console.log("expanded Bookmarks set to ", expandedBookmarks.value)
-})
-
 watch(() => selected.value, async (currentValue, oldValue) => {
   if (currentValue !== oldValue) {
     try {
@@ -156,10 +148,6 @@ watch(() => selected.value, async (currentValue, oldValue) => {
       }
     }
   }
-})
-
-watchEffect(() => {
-  localStorage.set("bookmarks.expanded", useNotificationsStore().bookmarksExpanded)
 })
 
 watchEffect(() => {
