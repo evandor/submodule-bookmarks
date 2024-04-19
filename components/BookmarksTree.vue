@@ -90,7 +90,7 @@ import {useNotificationsStore} from "src/stores/notificationsStore";
 import {useNotificationHandler} from "src/services/ErrorHandler";
 import {useSettingsStore} from "src/stores/settingsStore"
 import NavigationService from "src/services/NavigationService";
-import DeleteBookmarkFolderDialog from "components/dialogues/bookmarks/DeleteBookmarkFolderDialog.vue";
+import DeleteBookmarkFolderDialog from "src/bookmarks/dialogues/DeleteBookmarkFolderDialog.vue";
 import {TreeNode} from "src/models/Tree";
 import {useUtils} from "src/services/Utils";
 import {useUiStore} from "stores/uiStore";
