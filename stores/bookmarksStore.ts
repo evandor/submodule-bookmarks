@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia';
 import _ from "lodash";
 import {TreeNode} from "src/models/Tree";
-import {Bookmark} from "src/models/Bookmark";
+import {Bookmark} from "src/bookmarks/models/Bookmark";
 import {useUtils} from "src/services/Utils";
 import {useUiStore} from "stores/uiStore";
 
