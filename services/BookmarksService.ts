@@ -1,4 +1,4 @@
-import {Bookmark} from "src/models/Bookmark";
+import {Bookmark} from "src/bookmarks/models/Bookmark";
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
 import {useNotificationsStore} from "stores/notificationsStore";
 import {useUtils} from "src/services/Utils";
