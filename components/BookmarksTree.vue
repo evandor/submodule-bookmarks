@@ -59,12 +59,11 @@
 
       </template>
       <template v-slot:header-leaf="prop">
-        <q-img v-if="!useSettingsStore().isEnabled('noDDG')"
+        <q-img
                class="rounded-borders q-mr-sm"
                width="23px"
                height="23px"
                :src="favIconFromUrl(prop.node.url)"/>
-        <q-icon v-else name="o_article" class="q-mr-sm"/>
         <span class="cursor-pointer fit no-wrap ellipsis">{{ prop.node.label }}</span>
         <span class="text-right" v-if="mouseHover && prop.node.id === deleteButtonId" style="width:25px;">
           <q-icon name="delete_outline" color="negative" size="18px"
@@ -102,7 +101,6 @@ const bookmarksStore = useBookmarksStore()
 const $q = useQuasar();
 const localStorage = useQuasar().localStorage
 
-const loading = ref(true)
 const mouseHover = ref(false)
 const selected = ref('')
 const deleteButtonId = ref('')
@@ -114,7 +112,6 @@ const foldersCount = ref(0)
 const showOnlyFolders = ref(false)
 const expandedBookmarks = ref<string[]>([])
 
-const {handleSuccess, handleError} = useNotificationHandler()
 const {favIconFromUrl} = useUtils()
 
 const props = defineProps({
