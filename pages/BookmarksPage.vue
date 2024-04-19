@@ -92,7 +92,7 @@ import _ from "lodash"
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
 import {Bookmark} from "src/bookmarks/models/Bookmark";
 import {onMounted, ref, watchEffect} from "vue";
-import BookmarkList from "components/layouts/BookmarkList.vue";
+import BookmarkList from "src/bookmarks/components/BookmarkList.vue";
 import Analytics from "src/utils/google-analytics";
 
 const props = defineProps({
