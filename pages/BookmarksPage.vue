@@ -92,11 +92,8 @@ import _ from "lodash"
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
 import {Bookmark} from "src/bookmarks/models/Bookmark";
 import {onMounted, ref, watchEffect} from "vue";
-import AddBookmarkFolderDialog from "components/dialogues/AddBookmarkFolderDialog.vue";
 import BookmarkList from "components/layouts/BookmarkList.vue";
 import Analytics from "src/utils/google-analytics";
-import ImportFromBookmarksDialog from "components/dialogues/ImportFromBookmarksDialog.vue";
-import BookmarksService from "src/bookmarks/services/BookmarksService";
 
 const props = defineProps({
   inSidePanel: {type: Boolean, default: false}
