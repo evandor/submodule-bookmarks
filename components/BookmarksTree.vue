@@ -41,11 +41,8 @@
       <template v-slot:header-node="prop">
         <q-icon name="o_folder" color="warning" class="q-mr-sm"/>
         <span class="cursor-pointer fit no-wrap ellipsis">{{ prop.node.label }}
-          <span v-if="showOnlyFolders" style="font-size:smaller" class="text-grey">
-            ({{ prop.node.subFoldersCount }})
-          </span>
-          <span v-else="!showOnlyFolders" style="font-size:smaller" class="text-grey">
-            ({{ prop.node.subFoldersCount }} / {{ prop.node.subNodesCount }})
+          <span style="font-size:smaller" class="text-grey">
+            ({{ prop.node.subNodesCount }})
           </span>
         </span>
 
@@ -171,7 +168,7 @@ const deleteBookmarksFolderDialog = () => {
 
 const entered = (b: boolean) => mouseHover.value = b
 
-const bookmarksFilter = (node: TreeNode, filter: string) => {
+const bookmarksFilter = (node: any, filter: string) => {
   const filt = filter.toLowerCase()
   return node.label && node.label.toLowerCase().indexOf(filt) > -1
 }

@@ -21,7 +21,7 @@
       </div>
     </q-toolbar-title>
 
-    <slot name="actions">xxx</slot>
+    <slot name="actions"></slot>
 
   </q-toolbar>
 
