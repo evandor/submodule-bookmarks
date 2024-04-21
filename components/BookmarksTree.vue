@@ -139,7 +139,7 @@ watch(() => selected.value, async (currentValue, oldValue) => {
             router.push("/bookmarks/" + selected.value)
       }
     } catch (err) {
-      console.log("got error", err)
+      console.log(`catched error for 'selected' watch, currentValue=${currentValue}, oldValue=${oldValue}`, err)
       if (chrome.runtime.lastError) {
         console.warn("got runtime error", chrome.runtime.lastError)
       }
