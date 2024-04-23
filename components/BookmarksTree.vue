@@ -75,9 +75,6 @@
 
   </q-list>
 
-  <div>Current Bookmark: {{useBookmarksStore().currentBookmark}}</div>
-  <div>Current Folder: {{useBookmarksStore().currentFolder}}</div>
-
 </template>
 
 <script setup lang="ts">
