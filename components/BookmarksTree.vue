@@ -47,6 +47,11 @@
         </span>
 
         <span class="text-right" v-if="mouseHover && prop.node.id === deleteButtonId" style="width:25px;">
+            <q-icon name="add" color="positive" size="18px" @click.stop="addCurrentTab">
+              <q-tooltip>Add current tab</q-tooltip>
+            </q-icon>
+        </span>
+        <span class="text-right" v-if="mouseHover && prop.node.id === deleteButtonId" style="width:25px;">
             <q-icon name="delete_outline" color="negative" size="18px" @click.stop="deleteBookmarksFolderDialog">
               <q-tooltip>Delete this folder</q-tooltip>
             </q-icon>
@@ -88,6 +93,9 @@ import DeleteBookmarkFolderDialog from "src/bookmarks/dialogues/DeleteBookmarkFo
 import {TreeNode} from "src/models/Tree";
 import {useUtils} from "src/services/Utils";
 import {useUiStore} from "stores/uiStore";
+import {useTabsStore} from "src/bookmarks/stores/tabsStore";
+import {useCommandExecutor} from "src/services/CommandExecutor";
+import {CreateBookmarkCommand} from "src/bookmarks/commands/CreateBookmarkCommand";
 
 const router = useRouter()
 const bookmarksStore = useBookmarksStore()
@@ -168,6 +176,13 @@ const deleteBookmarksFolderDialog = () => {
       folderId: selected.value
     }
   })
+}
+
+const addCurrentTab = async () => {
+  const currentTab = useTabsStore().currentChromeTab
+  if (currentTab) {
+    await useCommandExecutor().executeFromUi(new CreateBookmarkCommand(currentTab, selected.value))
+  }
 }
 
 const entered = (b: boolean) => mouseHover.value = b
