@@ -49,6 +49,14 @@ class BookmarksService {
     })
     return Promise.resolve(res)
   }
+
+  async createBookmark(url: string, folderId: string) {
+    return chrome.bookmarks.create({
+      'parentId': folderId,
+      'title': 'Extensions doc',
+      'url': url
+    });
+  }
 }
 
 export default new BookmarksService();
