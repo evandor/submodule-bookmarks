@@ -1,5 +1,5 @@
 ```vue
-  import {useFeaturesStore} from "src/features/stores/featuresStore";
+  import {useFeaturesStore} from "stores/linkedFeaturesStore";
 
   <!-- (...) -->
 
