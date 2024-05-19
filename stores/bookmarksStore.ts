@@ -3,7 +3,6 @@ import _ from "lodash";
 import {TreeNode} from "src/models/Tree";
 import {Bookmark} from "src/bookmarks/models/Bookmark";
 import {useUiStore} from "stores/uiStore";
-import BookmarksTree from "src/bookmarks/components/BookmarksTree.vue";
 
 function nodesFrom(
   parent: chrome.bookmarks.BookmarkTreeNode,

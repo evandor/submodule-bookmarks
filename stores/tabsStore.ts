@@ -1,7 +1,5 @@
 import {defineStore} from 'pinia';
-import _ from 'lodash'
 import {computed, ref, watch, watchEffect} from "vue";
-import {uid} from "quasar";
 
 async function queryTabs(): Promise<chrome.tabs.Tab[]> {
   // @ts-ignore
