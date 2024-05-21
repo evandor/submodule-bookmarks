@@ -90,12 +90,12 @@ import {useQuasar} from "quasar";
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
 import NavigationService from "src/services/NavigationService";
 import DeleteBookmarkFolderDialog from "src/bookmarks/dialogues/DeleteBookmarkFolderDialog.vue";
-import {TreeNode} from "src/models/Tree";
 import {useUtils} from "src/services/Utils";
 import {useUiStore} from "stores/uiStore";
 import {useTabsStore} from "src/bookmarks/stores/tabsStore";
 import {useCommandExecutor} from "src/services/CommandExecutor";
 import {CreateBookmarkCommand} from "src/bookmarks/commands/CreateBookmarkCommand";
+import {TreeNode} from "src/bookmarks/models/Tree";
 
 const router = useRouter()
 const bookmarksStore = useBookmarksStore()
