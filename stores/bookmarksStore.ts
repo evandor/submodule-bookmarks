@@ -1,7 +1,7 @@
 import {defineStore} from 'pinia';
 import _ from "lodash";
 import {Bookmark} from "src/bookmarks/models/Bookmark";
-import {useUiStore} from "stores/uiStore";
+//import {useUiStore} from "stores/uiStore";
 import {TreeNode} from "src/bookmarks/models/Tree";
 
 function nodesFrom(
@@ -94,7 +94,7 @@ export const useBookmarksStore = defineStore('bookmarks', {
     },
 
     async loadBookmarks(): Promise<void> {
-      useUiStore().bookmarksLoading = true
+      //useUiStore().bookmarksLoading = true
       this.bookmarksTree = []
      // this.bookmarksNodes = []
       this.bookmarksNodes2 = []
@@ -117,7 +117,7 @@ export const useBookmarksStore = defineStore('bookmarks', {
       this.foldersCount = nodes[1]
       this.bookmarksCount = nodes[2]
 
-      useUiStore().bookmarksLoading = false
+      //useUiStore().bookmarksLoading = false
       return Promise.resolve()
     },
 
