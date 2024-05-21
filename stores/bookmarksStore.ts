@@ -1,8 +1,8 @@
 import {defineStore} from 'pinia';
 import _ from "lodash";
-import {TreeNode} from "src/models/Tree";
 import {Bookmark} from "src/bookmarks/models/Bookmark";
 import {useUiStore} from "stores/uiStore";
+import {TreeNode} from "src/bookmarks/models/Tree";
 
 function nodesFrom(
   parent: chrome.bookmarks.BookmarkTreeNode,
