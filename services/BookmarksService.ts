@@ -1,6 +1,6 @@
 import {Bookmark} from "src/bookmarks/models/Bookmark";
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
-import {useUtils} from "src/services/Utils";
+import {useUtils} from "src/core/services/Utils";
 
 const {inBexMode} = useUtils()
 
