@@ -86,7 +86,7 @@
 
 import {useRouter} from "vue-router";
 import {onMounted, PropType, ref, watch, watchEffect} from "vue";
-import {useQuasar} from "quasar";
+import {uid, useQuasar} from "quasar";
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
 import NavigationService from "src/core/services/NavigationService";
 import DeleteBookmarkFolderDialog from "src/bookmarks/dialogues/DeleteBookmarkFolderDialog.vue";
@@ -96,6 +96,7 @@ import {useTabsStore} from "src/bookmarks/stores/tabsStore";
 import {useCommandExecutor} from "src/core/services/CommandExecutor";
 import {CreateBookmarkCommand} from "src/bookmarks/commands/CreateBookmarkCommand";
 import {TreeNode} from "src/bookmarks/models/Tree";
+import {Bookmark} from "src/bookmarks/models/Bookmark";
 
 const router = useRouter()
 const bookmarksStore = useBookmarksStore()
@@ -140,7 +141,7 @@ watch(() => selected.value, async (currentValue, oldValue) => {
       console.log("selected ==>", currentValue, oldValue, result)
       if (result && result.length > 0 && result[0].url) {
         // we've got an actual bookmark
-        useBookmarksStore().currentBookmark = result[0]
+        useBookmarksStore().currentBookmark = new Bookmark(uid(),result[0])
         NavigationService.openSingleTab(result[0].url)
       } else {
         // we've got a folder
