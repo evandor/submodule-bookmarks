@@ -33,7 +33,7 @@
 import {ref, watchEffect} from "vue";
 
 import {useDialogPluginComponent} from 'quasar'
-import {useCommandExecutor} from "src/services/CommandExecutor";
+import {useCommandExecutor} from "src/core/services/CommandExecutor";
 import {CreateBookmarkFolderCommand} from "src/bookmarks/commands/CreateBookmarkFolderCommand";
 
 defineEmits([
