@@ -90,7 +90,7 @@ import {useQuasar} from "quasar";
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
 import NavigationService from "src/services/NavigationService";
 import DeleteBookmarkFolderDialog from "src/bookmarks/dialogues/DeleteBookmarkFolderDialog.vue";
-import {useUtils} from "src/services/Utils";
+import {useUtils} from "src/core/services/Utils";
 import {useUiStore} from "stores/uiStore";
 import {useTabsStore} from "src/bookmarks/stores/tabsStore";
 import {useCommandExecutor} from "src/core/services/CommandExecutor";
