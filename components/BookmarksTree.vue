@@ -93,7 +93,7 @@ import DeleteBookmarkFolderDialog from "src/bookmarks/dialogues/DeleteBookmarkFo
 import {useUtils} from "src/services/Utils";
 import {useUiStore} from "stores/uiStore";
 import {useTabsStore} from "src/bookmarks/stores/tabsStore";
-import {useCommandExecutor} from "src/services/CommandExecutor";
+import {useCommandExecutor} from "src/core/services/CommandExecutor";
 import {CreateBookmarkCommand} from "src/bookmarks/commands/CreateBookmarkCommand";
 import {TreeNode} from "src/bookmarks/models/Tree";
 
