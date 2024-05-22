@@ -67,7 +67,8 @@ export const useBookmarksStore = defineStore('bookmarks', {
     bookmarksLeaves: [] as unknown as object[],
 
     currentFolder: null as unknown as chrome.bookmarks.BookmarkTreeNode,
-    currentBookmark: null as unknown as chrome.bookmarks.BookmarkTreeNode,
+    //currentBookmark: null as unknown as chrome.bookmarks.BookmarkTreeNode,
+    currentBookmark: null as unknown as Bookmark,
 
     // the bookmarks (nodes and leaves) for the selected parent id
     bookmarksForFolder: null as unknown as Bookmark[],
