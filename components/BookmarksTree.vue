@@ -88,7 +88,7 @@ import {useRouter} from "vue-router";
 import {onMounted, PropType, ref, watch, watchEffect} from "vue";
 import {uid, useQuasar} from "quasar";
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
-import NavigationService from "src/core/services/NavigationService";
+import NavigationService from "src/services/NavigationService";
 import DeleteBookmarkFolderDialog from "src/bookmarks/dialogues/DeleteBookmarkFolderDialog.vue";
 import {useUtils} from "src/core/services/Utils";
 import {useUiStore} from "stores/uiStore";
