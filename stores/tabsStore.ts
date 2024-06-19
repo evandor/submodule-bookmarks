@@ -29,7 +29,7 @@ export const useTabsStore = defineStore('browsertabs', () => {
   }
 
   async function initialize() {
-    console.log(" ...initializing tabsStore")
+    console.debug(" ...initializing tabsStore")
     initListeners()
   }
 
