@@ -117,8 +117,8 @@ const checkIsValid = () => {
 async function createTabsetFrom(name: string, bookmarkId: string): Promise<Tabset> {
   //console.log("creating recursively", name, bookmarkId)
   const subTree:chrome.bookmarks.BookmarkTreeNode[] = await ChromeApi.childrenFor(bookmarkId)
-  const folders = _.filter(subTree, e => e.url === undefined)
-  const nodes = _.filter(subTree, e => e.url !== undefined)
+  const folders = _.filter(subTree, (e:chrome.bookmarks.BookmarkTreeNode) => e.url === undefined)
+  const nodes = _.filter(subTree, (e:chrome.bookmarks.BookmarkTreeNode) => e.url !== undefined)
   //console.log("folders", folders.length, folders)
   //console.log("nodes", nodes.length, nodes)
   const subfolders: Tabset[] = []
