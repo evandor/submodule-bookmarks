@@ -62,7 +62,7 @@
 
 import {ref} from "vue";
 import {QForm, useDialogPluginComponent, useQuasar} from "quasar";
-import ChromeApi from "src/services/ChromeApi";
+import ChromeApi from "src/app/BrowserApi";
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
 import {useCommandExecutor} from "src/core/services/CommandExecutor";
 import {CreateTabsetFromBookmarksCommand} from "src/domain/tabsets/CreateTabsetFromBookmarks";
