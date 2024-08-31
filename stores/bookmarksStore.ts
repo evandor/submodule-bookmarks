@@ -1,9 +1,7 @@
 import {defineStore} from 'pinia';
 import _ from "lodash";
-import {TreeNode} from "src/models/Tree";
-import {Bookmark} from "src/models/Bookmark";
-import {useUtils} from "src/services/Utils";
-import {useUiStore} from "stores/uiStore";
+import {Bookmark} from "src/bookmarks/models/Bookmark";
+import {TreeNode} from "src/bookmarks/models/Tree";
 
 function nodesFrom(
   parent: chrome.bookmarks.BookmarkTreeNode,
@@ -60,12 +58,16 @@ function nodesWithoutLeaves(
 }
 
 export const useBookmarksStore = defineStore('bookmarks', {
+
   state: () => ({
     bookmarksTree: [] as unknown as object[],
-    bookmarksNodes: [] as unknown as object[],
+    //bookmarksNodes: [] as unknown as object[],
     nonLeafNodes: [] as unknown as TreeNode[],
-    bookmarksNodes2: [] as unknown as TreeNode[],
+    bookmarksNodes2: [] as unknown as TreeNode[], // TODO which states to keep?
     bookmarksLeaves: [] as unknown as object[],
+
+    currentFolder: null as unknown as chrome.bookmarks.BookmarkTreeNode,
+    //currentBookmark: null as unknown as chrome.bookmarks.BookmarkTreeNode,
     currentBookmark: null as unknown as Bookmark,
 
     // the bookmarks (nodes and leaves) for the selected parent id
@@ -85,21 +87,19 @@ export const useBookmarksStore = defineStore('bookmarks', {
   },
 
   actions: {
+
     init() {
       console.debug(" ...initializing bookmarkStore")
-      if (process.env.MODE !== 'bex') {
-        return Promise.resolve()
-      }
       this.initListeners()
     },
+
     async loadBookmarks(): Promise<void> {
-      useUiStore().bookmarksLoading = true
+      //useUiStore().bookmarksLoading = true
       this.bookmarksTree = []
-      this.bookmarksNodes = []
+     // this.bookmarksNodes = []
       this.bookmarksNodes2 = []
       this.nonLeafNodes = []
       this.bookmarksLeaves = []
-      //const accessGranted = usePermissionsStore().hasPermission("bookmarks") && usePermissionsStore().hasFeature(FeatureIdent.BOOKMARKS)
       console.debug(" ...loading bookmarks")//, (new Error()).stack)
       // @ts-ignore
       const bookmarks: chrome.bookmarks.BookmarkTreeNode[] = await chrome.bookmarks.search({})//, async (bookmarks) => {
@@ -108,9 +108,7 @@ export const useBookmarksStore = defineStore('bookmarks', {
       // @ts-ignore
       const tree: chrome.bookmarks.BookmarkTreeNode[] = await chrome.bookmarks.getTree()
 
-      //console.log("*** ======= tree", tree)
       const nodes = nodesFrom(tree[0])
-      //console.log("bookmarksNodes2", nodes.toString())
       if (nodes[0]) {
         this.bookmarksNodes2 = nodes[0].children
         let copy = (JSON.parse(JSON.stringify(nodes[0])));
@@ -119,17 +117,18 @@ export const useBookmarksStore = defineStore('bookmarks', {
       this.foldersCount = nodes[1]
       this.bookmarksCount = nodes[2]
 
-      useUiStore().bookmarksLoading = false
+      //useUiStore().bookmarksLoading = false
       return Promise.resolve()
-
-
     },
+
     remove(bm: Bookmark) {
       this.bookmarksForFolder = _.filter(this.bookmarksForFolder, (e: Bookmark) => e.id !== bm.id)
     },
+
     initListeners() {
       // moved to chromeBookmarkListeners
     },
+
     updateUrl(from: string, to: string) {
       chrome.bookmarks.search({url: from}, (results: chrome.bookmarks.BookmarkTreeNode[]) => {
         results.forEach((r: chrome.bookmarks.BookmarkTreeNode) => {

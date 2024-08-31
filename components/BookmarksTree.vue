@@ -36,19 +36,21 @@
         node-key="id"
         @mouseenter="entered(true)"
         @mouseleave="entered(false)"
-        v-model:selected="selected"
-        v-model:expanded="useNotificationsStore().bookmarksExpanded">
+        v-model:selected="selected">
+<!--        v-model:expanded="useNotificationsStore().bookmarksExpanded">-->
       <template v-slot:header-node="prop">
         <q-icon name="o_folder" color="warning" class="q-mr-sm"/>
         <span class="cursor-pointer fit no-wrap ellipsis">{{ prop.node.label }}
-          <span v-if="showOnlyFolders" style="font-size:smaller" class="text-grey">
-            ({{ prop.node.subFoldersCount }})
-          </span>
-          <span v-else="!showOnlyFolders" style="font-size:smaller" class="text-grey">
-            ({{ prop.node.subFoldersCount }} / {{ prop.node.subNodesCount }})
+          <span style="font-size:smaller" class="text-grey">
+            ({{ prop.node.subNodesCount }})
           </span>
         </span>
 
+        <span class="text-right" v-if="mouseHover && prop.node.id === deleteButtonId" style="width:25px;">
+            <q-icon name="add" color="positive" size="18px" @click.stop="addCurrentTab">
+              <q-tooltip>Add current tab</q-tooltip>
+            </q-icon>
+        </span>
         <span class="text-right" v-if="mouseHover && prop.node.id === deleteButtonId" style="width:25px;">
             <q-icon name="delete_outline" color="negative" size="18px" @click.stop="deleteBookmarksFolderDialog">
               <q-tooltip>Delete this folder</q-tooltip>
@@ -59,12 +61,11 @@
 
       </template>
       <template v-slot:header-leaf="prop">
-        <q-img v-if="!useSettingsStore().isEnabled('noDDG')"
+        <q-img
                class="rounded-borders q-mr-sm"
                width="23px"
                height="23px"
                :src="favIconFromUrl(prop.node.url)"/>
-        <q-icon v-else name="o_article" class="q-mr-sm"/>
         <span class="cursor-pointer fit no-wrap ellipsis">{{ prop.node.label }}</span>
         <span class="text-right" v-if="mouseHover && prop.node.id === deleteButtonId" style="width:25px;">
           <q-icon name="delete_outline" color="negative" size="18px"
@@ -85,24 +86,23 @@
 
 import {useRouter} from "vue-router";
 import {onMounted, PropType, ref, watch, watchEffect} from "vue";
-import {useQuasar} from "quasar";
+import {uid, useQuasar} from "quasar";
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
-import {useNotificationsStore} from "src/stores/notificationsStore";
-import {useNotificationHandler} from "src/services/ErrorHandler";
-import {useSettingsStore} from "src/stores/settingsStore"
 import NavigationService from "src/services/NavigationService";
-import DeleteBookmarkFolderDialog from "components/dialogues/bookmarks/DeleteBookmarkFolderDialog.vue";
-import {TreeNode} from "src/models/Tree";
-import {useUtils} from "src/services/Utils";
-import {useUiStore} from "stores/uiStore";
+import DeleteBookmarkFolderDialog from "src/bookmarks/dialogues/DeleteBookmarkFolderDialog.vue";
+import {useUtils} from "src/core/services/Utils";
+import {useUiStore} from "src/ui/stores/uiStore";
+import {useTabsStore} from "src/bookmarks/stores/tabsStore";
+import {useCommandExecutor} from "src/core/services/CommandExecutor";
+import {CreateBookmarkCommand} from "src/bookmarks/commands/CreateBookmarkCommand";
+import {TreeNode} from "src/bookmarks/models/Tree";
+import {Bookmark} from "src/bookmarks/models/Bookmark";
 
 const router = useRouter()
 const bookmarksStore = useBookmarksStore()
 
 const $q = useQuasar();
-const localStorage = useQuasar().localStorage
 
-const loading = ref(true)
 const mouseHover = ref(false)
 const selected = ref('')
 const deleteButtonId = ref('')
@@ -114,7 +114,6 @@ const foldersCount = ref(0)
 const showOnlyFolders = ref(false)
 const expandedBookmarks = ref<string[]>([])
 
-const {handleSuccess, handleError} = useNotificationHandler()
 const {favIconFromUrl} = useUtils()
 
 const props = defineProps({
@@ -134,35 +133,31 @@ watchEffect(() => {
   bmsCount.value = bookmarksStore.bookmarksCount
 })
 
-watchEffect(() => {
-  expandedBookmarks.value = useNotificationsStore().bookmarksExpanded
-  console.log("expanded Bookmarks set to ", expandedBookmarks.value)
-})
-
 watch(() => selected.value, async (currentValue, oldValue) => {
   if (currentValue !== oldValue) {
     try {
       // @ts-ignore
       const result = await chrome.bookmarks.get(currentValue)
+      console.log("selected ==>", currentValue, oldValue, result)
       if (result && result.length > 0 && result[0].url) {
+        // we've got an actual bookmark
+        useBookmarksStore().currentBookmark = new Bookmark(uid(),result[0])
         NavigationService.openSingleTab(result[0].url)
       } else {
+        // we've got a folder
+        useBookmarksStore().currentFolder = result[0]
         props.inSidePanel ?
             NavigationService.openOrCreateTab(
                 [chrome.runtime.getURL("/www/index.html#/mainpanel/bookmarks/" + selected.value)], undefined, [], true) :
             router.push("/bookmarks/" + selected.value)
       }
     } catch (err) {
-      console.log("got error", err)
+      console.log(`catched error for 'selected' watch, currentValue=${currentValue}, oldValue=${oldValue}`, err)
       if (chrome.runtime.lastError) {
         console.warn("got runtime error", chrome.runtime.lastError)
       }
     }
   }
-})
-
-watchEffect(() => {
-  localStorage.set("bookmarks.expanded", useNotificationsStore().bookmarksExpanded)
 })
 
 watchEffect(() => {
@@ -184,9 +179,16 @@ const deleteBookmarksFolderDialog = () => {
   })
 }
 
+const addCurrentTab = async () => {
+  const currentTab = useTabsStore().currentChromeTab
+  if (currentTab) {
+    await useCommandExecutor().executeFromUi(new CreateBookmarkCommand(currentTab, selected.value))
+  }
+}
+
 const entered = (b: boolean) => mouseHover.value = b
 
-const bookmarksFilter = (node: TreeNode, filter: string) => {
+const bookmarksFilter = (node: any, filter: string) => {
   const filt = filter.toLowerCase()
   return node.label && node.label.toLowerCase().indexOf(filt) > -1
 }
