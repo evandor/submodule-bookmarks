@@ -42,7 +42,7 @@ import Analytics from "src/core/utils/google-analytics";
 import AddBookmarkFolderDialog from "src/bookmarks/dialogues/AddBookmarkFolderDialog.vue";
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
 import {useQuasar} from "quasar";
-import {useRoute, useRouter} from "vue-router";
+import {useRouter} from "vue-router";
 import BookmarksService from "src/bookmarks/services/BookmarksService";
 import {Bookmark} from "src/bookmarks/models/Bookmark";
 import _ from "lodash"

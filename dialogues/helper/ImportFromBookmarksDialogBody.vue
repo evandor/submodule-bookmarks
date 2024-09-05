@@ -86,6 +86,7 @@ const props = defineProps({
   count: {type: Number, default: 0}
 })
 
+// @ts-ignore
 const {dialogRef, onDialogHide, onDialogCancel} = useDialogPluginComponent()
 
 const bookmarksStore = useBookmarksStore()

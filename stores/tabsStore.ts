@@ -1,10 +1,5 @@
 import {defineStore} from 'pinia';
-import {computed, ref, watch, watchEffect} from "vue";
-
-async function queryTabs(): Promise<chrome.tabs.Tab[]> {
-  // @ts-ignore
-  return await chrome.tabs.query({currentWindow: true});
-}
+import {ref} from "vue"
 
 /**
  * a pinia store for "browsertabs".
@@ -41,11 +36,6 @@ export const useTabsStore = defineStore('browsertabs', () => {
     console.debug(" ...initializing tabsStore Listeners")
     //chrome.tabs.onUpdated.addListener(onTabUpdatedListener)
     chrome.tabs.onActivated.addListener(onTabActivatedListener)
-  }
-
-  async function resetListeners() {
-    //chrome.tabs.onUpdated.removeListener(onTabUpdatedListener)
-    chrome.tabs.onActivated.removeListener(onTabActivatedListener)
   }
 
   return {

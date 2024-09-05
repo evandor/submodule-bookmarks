@@ -112,7 +112,6 @@ const filterRef = ref(null)
 const bmsCount = ref(0)
 const foldersCount = ref(0)
 const showOnlyFolders = ref(false)
-const expandedBookmarks = ref<string[]>([])
 
 const {favIconFromUrl} = useUtils()
 
@@ -199,13 +198,6 @@ const resetFilter = () => {
     // @ts-ignore
     filterRef.value.focus()
   }
-}
-
-const shorten = (str: string, maxLength: number) => {
-  if (str.length > maxLength) {
-    return str.substring(0, maxLength - 3) + "..."
-  }
-  return str
 }
 
 const deleteBookmark = async (id: string) => {

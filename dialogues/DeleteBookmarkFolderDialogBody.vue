@@ -24,10 +24,7 @@
 <script lang="ts" setup>
 
 import {ref} from "vue";
-import {QForm} from "quasar";
-
-import {useDialogPluginComponent} from 'quasar'
-import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
+import {QForm, useDialogPluginComponent} from "quasar";
 import BookmarksService from "src/bookmarks/services/BookmarksService";
 
 defineEmits([
@@ -37,8 +34,6 @@ defineEmits([
 const props = defineProps({
   folderId: {type: String, required: true}
 })
-
-const bookmarksStore = useBookmarksStore()
 
 const theForm = ref<QForm>(null as unknown as QForm)
 

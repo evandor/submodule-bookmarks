@@ -29,7 +29,7 @@
   <q-expansion-item v-if="folders().length > 0"
                     expand-separator
                     default-opened>
-    <template v-slot:header="{ expanded }">
+    <template v-slot:header>
       <q-item-section>
         <div>
           <span class="text-weight-bold">{{
@@ -58,7 +58,7 @@
   <q-expansion-item
       expand-separator
       default-opened>
-    <template v-slot:header="{ expanded }">
+    <template v-slot:header>
       <q-item-section>
         <div>
           <span class="text-weight-bold">{{
@@ -87,7 +87,7 @@
 
 <script setup lang="ts">
 import {useRoute, useRouter} from "vue-router";
-import {uid, useQuasar} from "quasar";
+import {uid} from "quasar";
 import _ from "lodash"
 import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
 import {Bookmark} from "src/bookmarks/models/Bookmark";
@@ -102,8 +102,6 @@ const props = defineProps({
 const route = useRoute();
 const router = useRouter();
 const bookmarksStore = useBookmarksStore()
-
-const $q = useQuasar()
 
 const bookmarksForFolder = ref<Bookmark[]>([])
 const bookmarksForBreadcrumb = ref<Bookmark[]>([])

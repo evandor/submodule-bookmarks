@@ -30,7 +30,7 @@
 
 <script lang="ts" setup>
 
-import {ref, watchEffect} from "vue";
+import {ref} from "vue";
 
 import {useDialogPluginComponent} from 'quasar'
 import {useCommandExecutor} from "src/core/services/CommandExecutor";
@@ -44,6 +44,7 @@ const props = defineProps({
   parentFolderId: {type: String, required: true}
 })
 
+// @ts-ignore
 const {dialogRef, onDialogHide, onDialogOK, onDialogCancel} = useDialogPluginComponent()
 const folderName = ref('')
 
