@@ -26,7 +26,6 @@
 import {Bookmark} from "src/bookmarks/models/Bookmark";
 import {PropType} from "vue";
 import {VueDraggableNext} from 'vue-draggable-next'
-import {useCommandExecutor} from "src/core/services/CommandExecutor";
 import BookmarkListElementWidget from "components/widgets/BookmarkListElementWidget.vue";
 
 const props = defineProps({
