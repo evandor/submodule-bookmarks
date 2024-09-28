@@ -89,7 +89,7 @@ export const useBookmarksStore = defineStore('bookmarks', {
   actions: {
 
     init() {
-      console.debug(" ...initializing bookmarkStore")
+      console.debug(" ...initializing bookmarkStore",'✅')
       this.initListeners()
     },
 
@@ -100,7 +100,7 @@ export const useBookmarksStore = defineStore('bookmarks', {
       this.bookmarksNodes2 = []
       this.nonLeafNodes = []
       this.bookmarksLeaves = []
-      console.debug(" ...loading bookmarks")//, (new Error()).stack)
+      //console.debug(" ...loading bookmarks")//, (new Error()).stack)
       // @ts-ignore
       const bookmarks: chrome.bookmarks.BookmarkTreeNode[] = await chrome.bookmarks.search({})//, async (bookmarks) => {
       this.bookmarksLeaves = bookmarks
