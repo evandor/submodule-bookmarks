@@ -9,7 +9,7 @@ function nodesFrom(
   allBookmarksCount = 0,
   level: number = 1): [TreeNode | undefined, number, number] {
 
-  const parentNode = new TreeNode(parent.id, parent.title, parent.title, parent.url, parent.url ? 'o_article' : 'o_folder', [], 0, 0)
+  const parentNode = new TreeNode(parent.id, parent.title, parent.title, parent.url, parent.url ? 'o_article' : 'o_folder', [], 0,0, 0)
 
   level++
   let subNodes: TreeNode[] = []

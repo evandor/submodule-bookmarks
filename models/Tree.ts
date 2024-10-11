@@ -9,9 +9,14 @@ export class TreeNode {
     public url: string | undefined,
     public icon: string,
     public children: TreeNode[],
+    public level: number = 0,
     public subFoldersCount = 0,
     public subNodesCount = 0) {
-    this.header = !url ? 'node' : 'leaf'
+    this.header = level > 0
+      ? children.length > 0
+        ? 'node'
+        : 'leaf'
+      : 'root'
   }
 }
 
