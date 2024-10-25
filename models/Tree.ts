@@ -1,7 +1,5 @@
 export class TreeNode {
 
-  header: string;
-
   constructor(
     public id: string,
     public title: string,
@@ -12,8 +10,11 @@ export class TreeNode {
     public level: number = 0,
     public subFoldersCount = 0,
     public subNodesCount = 0) {
-    this.header = level > 0
-      ? children.length > 0
+  }
+
+  public getHeader() {
+    return this.level > 0
+      ? this.children.length > 0
         ? 'node'
         : 'leaf'
       : 'root'
