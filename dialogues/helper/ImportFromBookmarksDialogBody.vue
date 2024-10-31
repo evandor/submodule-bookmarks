@@ -21,7 +21,7 @@
                        ]"
                    data-testid="newTabsetName"/>
 
-          <template v-if="props.foldersCount > 0 && useFeaturesStore().hasFeature(FeatureIdent.TABSET_SUBFOLDER)">
+          <template v-if="props.foldersCount > 0">
             <q-checkbox
               v-model="recursive" label="Recursively"/>&nbsp;
             <q-icon name="help" color="primary" size="1em">
