@@ -31,14 +31,14 @@
             <br>
           </template>
 
-          <q-checkbox
-            data-testid="newTabsetAutoAdd"
-            v-model="deleteBookmarks" label="Delete Bookmarks"/>&nbsp;
-          <q-icon name="help" color="primary" size="1em">
-            <q-tooltip class="tooltip">If you select this option, the bookmarks will be imported as a new tabset and
-              deleted from your bookmarks automatically
-            </q-tooltip>
-          </q-icon>
+<!--          <q-checkbox-->
+<!--            data-testid="newTabsetAutoAdd"-->
+<!--            v-model="deleteBookmarks" label="Delete Bookmarks"/>&nbsp;-->
+<!--          <q-icon name="help" color="primary" size="1em">-->
+<!--            <q-tooltip class="tooltip">If you select this option, the bookmarks will be imported as a new tabset and-->
+<!--              deleted from your bookmarks automatically-->
+<!--            </q-tooltip>-->
+<!--          </q-icon>-->
 
           <!--        <q-checkbox v-model="clearTabs" label="close current Tabs"/>-->
           <div class="text-body2 text-warning"> {{ newTabsetDialogWarning() }}</div>
@@ -164,10 +164,10 @@ const importBookmarks = async () => {
       return res
     })
     .then(res => {
-      if (deleteBookmarks.value) {
-        console.log("deleting bookmarks", candidates)
-        candidates.forEach((c: chrome.bookmarks.BookmarkTreeNode) => chrome.bookmarks.remove(c.id))
-      }
+      // if (deleteBookmarks.value) {
+      //   console.log("deleting bookmarks", candidates)
+      //   candidates.forEach((c: chrome.bookmarks.BookmarkTreeNode) => chrome.bookmarks.remove(c.id))
+      // }
       chrome.tabs.getCurrent().then(current => {
         if (current && current.id) {
           chrome.tabs.remove(current.id)
@@ -177,9 +177,6 @@ const importBookmarks = async () => {
       if (chrome.runtime.lastError) {
         console.warn("got runtime error", chrome.runtime.lastError)
       }
-      // props.inSidePanel ?
-      //   router.push("/mainpanel/tabsets/" + tabsStore.currentTabsetId) :
-      //   router.push("/tabsets/" + tabsStore.currentTabsetId)
     })
 
   $q.loadingBar?.stop()
