@@ -69,10 +69,8 @@ import {CreateTabsetFromBookmarksCommand} from "src/domain/tabsets/CreateTabsetF
 import {Tabset, TABSET_NAME_MAX_LENGTH} from "src/tabsets/models/Tabset";
 import _ from "lodash"
 import {useTabsetService} from "src/tabsets/services/TabsetService2";
-import {FeatureIdent} from "src/app/models/FeatureIdent";
 import {useUtils} from "src/core/services/Utils";
 import {useTabsetsStore} from "src/tabsets/stores/tabsetsStore";
-import {useFeaturesStore} from "src/features/stores/featuresStore";
 
 const {sendMsg} = useUtils()
 
@@ -96,7 +94,6 @@ const theForm = ref<QForm>(null as unknown as QForm)
 const newTabsetName = ref(bookmarksStore.currentBookmark.chromeBookmark.title)
 const bookmarkId = ref(bookmarksStore.currentBookmark.chromeBookmark.id)
 const isValid = ref(true)
-const deleteBookmarks = ref(false)
 const recursive = ref(false)
 
 const newTabsetDialogWarning = () => {
