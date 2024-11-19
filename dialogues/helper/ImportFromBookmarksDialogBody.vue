@@ -112,6 +112,7 @@ const checkIsValid = () => {
   }
 }
 
+// TODO get rid of tabset-references here; use AppEventDispatcher
 async function createTabsetFrom(name: string, bookmarkId: string): Promise<Tabset> {
   //console.log("creating recursively", name, bookmarkId)
   const subTree:chrome.bookmarks.BookmarkTreeNode[] = await ChromeApi.childrenFor(bookmarkId)
