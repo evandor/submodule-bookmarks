@@ -3,17 +3,17 @@
   <q-list class="q-mt-none">
 
     <div class="row">
-      <div class="col-12 text-right">
+      <div class="col-12 text-right" v-if="props.showToggle">
         Show only Folders
         <q-checkbox v-model="showOnlyFolders" @click.stop="emits('toggleShowOnlyFolders')"/>
       </div>
-      <div class="col-12 q-mb-md">
+      <div class="col-12 q-mb-md" v-if="props.showFilter">
         <q-input
-            dense
-            ref="filterRef"
-            filled
-            v-model="filter"
-            :label="showOnlyFolders ? 'Filter Bookmark Folders' : 'Filter Bookmarks and Folders'">
+          dense
+          ref="filterRef"
+          filled
+          v-model="filter"
+          :label="showOnlyFolders ? 'Filter Bookmark Folders' : 'Filter Bookmarks and Folders'">
           <template v-slot:append>
             <q-icon v-if="filter !== ''" name="clear" class="cursor-pointer" @click="resetFilter"/>
           </template>
@@ -23,21 +23,21 @@
 
     <div class="row q-ma-lg fit items-center justify-center" v-if="useUiStore().bookmarksLoading">
       <q-spinner-dots
-          color="primary"
-          size="2em"
+        color="primary"
+        size="2em"
       />
     </div>
 
     <q-tree
-        v-if="bookmarksPermissionGranted && !useUiStore().bookmarksLoading"
-        :nodes="props.nodes"
-        :filter="filter"
-        :filterMethod="bookmarksFilter"
-        node-key="id"
-        @mouseenter="entered(true)"
-        @mouseleave="entered(false)"
-        v-model:selected="selected">
-<!--        v-model:expanded="useNotificationsStore().bookmarksExpanded">-->
+      v-if="bookmarksPermissionGranted && !useUiStore().bookmarksLoading"
+      :nodes="props.nodes"
+      :filter="filter"
+      :filterMethod="bookmarksFilter"
+      node-key="id"
+      @mouseenter="entered(true)"
+      @mouseleave="entered(false)"
+      v-model:selected="selected">
+      <!--        v-model:expanded="useNotificationsStore().bookmarksExpanded">-->
       <template v-slot:header-node="prop">
         <q-icon name="o_folder" color="warning" class="q-mr-sm"/>
         <span class="cursor-pointer fit no-wrap ellipsis">{{ prop.node.label }}
@@ -46,26 +46,31 @@
           </span>
         </span>
 
-        <span class="text-right" v-if="mouseHover && prop.node.id === deleteButtonId" style="width:25px;">
+        <span class="text-right" v-if="nodeActionsContain('add') && mouseHover && prop.node.id === deleteButtonId"
+              style="width:25px;">
             <q-icon name="add" color="positive" size="18px" @click.stop="addCurrentTab">
               <q-tooltip>Add current tab</q-tooltip>
             </q-icon>
         </span>
-        <span class="text-right" v-if="mouseHover && prop.node.id === deleteButtonId" style="width:25px;">
+        <span class="text-right" style="width:25px;" v-if="nodeActionsContain('delete')">
             <q-icon name="delete_outline" color="negative" size="18px" @click.stop="deleteBookmarksFolderDialog">
               <q-tooltip>Delete this folder</q-tooltip>
             </q-icon>
         </span>
-        <span class="text-right" v-else style="width:25px;">&nbsp;</span>
+        <span class="text-right" style="width:25px;" v-if="nodeActionsContain('import')">
+            <q-icon name="upload_file" color="primary" size="18px" @click.stop="importFrom(prop.node)">
+              <q-tooltip>Import</q-tooltip>
+            </q-icon>
+        </span>
 
 
       </template>
       <template v-slot:header-leaf="prop">
         <q-img
-               class="rounded-borders q-mr-sm"
-               width="23px"
-               height="23px"
-               :src="favIconFromUrl(prop.node.url)"/>
+          class="rounded-borders q-mr-sm"
+          width="23px"
+          height="23px"
+          :src="favIconFromUrl(prop.node.url)"/>
         <span class="cursor-pointer fit no-wrap ellipsis">{{ prop.node.label }}</span>
         <span class="text-right" v-if="mouseHover && prop.node.id === deleteButtonId" style="width:25px;">
           <q-icon name="delete_outline" color="negative" size="18px"
@@ -97,6 +102,8 @@ import {useCommandExecutor} from "src/core/services/CommandExecutor";
 import {CreateBookmarkCommand} from "src/bookmarks/commands/CreateBookmarkCommand";
 import {TreeNode} from "src/bookmarks/models/Tree";
 import {Bookmark} from "src/bookmarks/models/Bookmark";
+import ImportFromBookmarksDialog from "src/bookmarks/dialogues/ImportFromBookmarksDialog.vue";
+import {ExecutionResult} from "src/core/domain/ExecutionResult";
 
 const router = useRouter()
 const bookmarksStore = useBookmarksStore()
@@ -117,11 +124,14 @@ const {favIconFromUrl} = useUtils()
 
 const props = defineProps({
   inSidePanel: {type: Boolean, default: false},
+  showFilter: {type: Boolean, default: true},
+  showToggle: {type: Boolean, default: true},
   showOnlyFolders: {type: Boolean, default: true},
+  nodesActions: {type: String, default: ""},
   nodes: {type: Object as PropType<TreeNode[]>, required: true}
 })
 
-const emits = defineEmits(['toggleShowOnlyFolders'])
+const emits = defineEmits(['toggleShowOnlyFolders','imported'])
 
 onMounted(() => {
   showOnlyFolders.value = props.showOnlyFolders
@@ -140,15 +150,15 @@ watch(() => selected.value, async (currentValue, oldValue) => {
       console.log("selected ==>", currentValue, oldValue, result)
       if (result && result.length > 0 && result[0].url) {
         // we've got an actual bookmark
-        useBookmarksStore().currentBookmark = new Bookmark(uid(),result[0])
+        useBookmarksStore().currentBookmark = new Bookmark(uid(), result[0])
         NavigationService.openSingleTab(result[0].url)
       } else {
         // we've got a folder
         useBookmarksStore().currentFolder = result[0]
         props.inSidePanel ?
-            NavigationService.openOrCreateTab(
-                [chrome.runtime.getURL("/www/index.html#/mainpanel/bookmarks/" + selected.value)], undefined, [], true) :
-            router.push("/bookmarks/" + selected.value)
+          NavigationService.openOrCreateTab(
+            [chrome.runtime.getURL("/www/index.html#/mainpanel/bookmarks/" + selected.value)], undefined, [], true) :
+          router.push("/bookmarks/" + selected.value)
       }
     } catch (err) {
       console.log(`catched error for 'selected' watch, currentValue=${currentValue}, oldValue=${oldValue}`, err)
@@ -203,6 +213,28 @@ const resetFilter = () => {
 const deleteBookmark = async (id: string) => {
   console.log("id", id)
   await chrome.bookmarks.remove(id)
+}
+
+const nodeActionsContain = (ident: string) => props.nodesActions.split(",").indexOf(ident) >= 0
+
+const importFrom = (node: TreeNode) => {
+  $q.dialog({
+    component: ImportFromBookmarksDialog,
+    componentProps: {
+      count: node.subNodesCount,
+      bmId: Number(node.id),
+      bmTitle: node.label,
+      foldersCount: node.subFoldersCount,
+      inSidePanel: true
+    }
+  })
+    .onOk((a:ExecutionResult<object>) => {
+      console.log("a", a)
+      //useTabsetsStore().selectCurrentTabset()
+      //router.push("/sidepanel")
+      emits('imported', a)
+    })
+
 }
 
 </script>

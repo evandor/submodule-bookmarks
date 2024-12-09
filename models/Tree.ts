@@ -1,5 +1,7 @@
 export class TreeNode {
 
+  public header = 'node'
+
   constructor(
     public id: string,
     public title: string,
@@ -10,6 +12,7 @@ export class TreeNode {
     public level: number = 0,
     public subFoldersCount = 0,
     public subNodesCount = 0) {
+
   }
 
   public getHeader() {

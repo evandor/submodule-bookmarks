@@ -62,7 +62,6 @@ const folders = (): Bookmark[] => _.filter(bookmarksStore.bookmarksForFolder, (b
 const nonFolders = (): Bookmark[] => _.filter(bookmarksStore.bookmarksForFolder, (bm: Bookmark) => !!bm.chromeBookmark.url)
 
 
-
 const addUrlDialog = () => $q.dialog({
   component: AddBookmarkFolderDialog,
   componentProps: {parentFolderId: bookmarkId.value}
@@ -73,6 +72,8 @@ const importBookmarks = () => $q.dialog({
   componentProps: {
     count: nonFolders().length,
     foldersCount: folders().length,
+    bmId: Number(bookmarksStore.currentBookmark.chromeBookmark.id),
+    bmTitle: bookmarksStore.currentBookmark.chromeBookmark.title,
     inSidePanel: true
   }
 })
