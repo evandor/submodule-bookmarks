@@ -18,7 +18,7 @@ export const useTabsStore = defineStore('browsertabs', () => {
   const onTabActivatedListener = async (activeInfo: chrome.tabs.TabActiveInfo) => {
     const res = await chrome.tabs.query({currentWindow: true, active: true})
     if (res && res.length === 1) {
-      console.log("tab active", res[0].url)
+      console.log("tab active", res[0]!.url)
       currentChromeTab.value = res[0]
     }
   }

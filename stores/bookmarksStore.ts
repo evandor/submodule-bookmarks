@@ -114,7 +114,7 @@ export const useBookmarksStore = defineStore('bookmarks', {
       // @ts-ignore
       const tree: chrome.bookmarks.BookmarkTreeNode[] = await chrome.bookmarks.getTree()
 
-      const tni:TreeNodeInfo = nodesFrom(tree[0])
+      const tni:TreeNodeInfo = nodesFrom(tree[0]!)
       if (tni.treeNode) {
         this.bookmarksNodes2 = tni.treeNode.children
         let copy:TreeNode = (JSON.parse(JSON.stringify(tni.treeNode)));

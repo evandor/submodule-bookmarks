@@ -148,13 +148,13 @@ watch(() => selected.value, async (currentValue, oldValue) => {
       // @ts-ignore
       const result = await chrome.bookmarks.get(currentValue)
       console.log("selected ==>", currentValue, oldValue, result)
-      if (result && result.length > 0 && result[0].url) {
+      if (result && result.length > 0 && result[0]!.url) {
         // we've got an actual bookmark
-        useBookmarksStore().currentBookmark = new Bookmark(uid(), result[0])
-        NavigationService.openSingleTab(result[0].url)
+        useBookmarksStore().currentBookmark = new Bookmark(uid(), result[0]!)
+        NavigationService.openSingleTab(result[0]!.url)
       } else {
         // we've got a folder
-        useBookmarksStore().currentFolder = result[0]
+        useBookmarksStore().currentFolder = result[0]!
         props.inSidePanel ?
           NavigationService.openOrCreateTab(
             [chrome.runtime.getURL("/www/index.html#/mainpanel/bookmarks/" + selected.value)], undefined, [], true) :

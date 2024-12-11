@@ -1,53 +1,53 @@
 <template>
   <div>
-<!--    <q-form @submit.prevent="importBookmarks()" ref="theForm">-->
+    <!--    <q-form @submit.prevent="importBookmarks()" ref="theForm">-->
 
-      <q-card style="min-width: 300px">
-        <q-card-section>
-          <div class="text-h6" v-if="props.foldersCount === 0">Import these {{ props.count }} Bookmarks as Tabset</div>
-          <div class="text-h6" v-else>Import Bookmarks recursively</div>
-        </q-card-section>
+    <q-card style="min-width: 300px">
+      <q-card-section>
+        <div class="text-h6" v-if="props.foldersCount === 0">Import these {{ props.count }} Bookmarks as Tabset</div>
+        <div class="text-h6" v-else>Import Bookmarks recursively</div>
+      </q-card-section>
 
-        <q-card-section class="q-pt-none">
-          <div class="text-body">New Tabset's name:</div>
+      <q-card-section class="q-pt-none">
+        <div class="text-body">New Tabset's name:</div>
 
-          <q-input v-model="newTabsetName"
-                   class="q-mb-md q-pb-none"
-                   dense autofocus
-                   @update:model-value="val => checkIsValid()"
-                   :rules="[
+        <q-input v-model="newTabsetName"
+                 class="q-mb-md q-pb-none"
+                 dense autofocus
+                 @update:model-value="val => checkIsValid()"
+                 :rules="[
                        (val:string) => Tabset.newTabsetNameIsValid(val) || 'Please do not use special Characters',
                        (val:string) => Tabset.newTabsetNameIsShortEnough(val) || 'the maximum length is ' + TABSET_NAME_MAX_LENGTH
                        ]"
-                   data-testid="newTabsetName"/>
+                 data-testid="newTabsetName"/>
 
-          <template v-if="props.foldersCount > 0">
-            <q-checkbox
-              v-model="recursive" label="Recursively"/>&nbsp;
-            <q-icon name="help" color="primary" size="1em">
-              <q-tooltip class="tooltip">If you select this option, all bookmarks and subfolders will be added as well
-              </q-tooltip>
-            </q-icon>
-            <br>
-          </template>
+        <template v-if="props.foldersCount > 0">
+          <q-checkbox
+            v-model="recursive" label="Recursively"/>&nbsp;
+          <q-icon name="help" color="primary" size="1em">
+            <q-tooltip class="tooltip">If you select this option, all bookmarks and subfolders will be added as well
+            </q-tooltip>
+          </q-icon>
+          <br>
+        </template>
 
-          <div class="text-body2 text-warning"> {{ newTabsetDialogWarning() }}</div>
+        <div class="text-body2 text-warning"> {{ newTabsetDialogWarning() }}</div>
 
-        </q-card-section>
+      </q-card-section>
 
-        <q-card-actions align="right" class="text-primary">
-          <q-btn label="Cancel" size="sm" color="accent" v-close-popup/>
-          <q-btn type="submit" label="Create new Tabset" color="warning" size="sm"
-                 data-testid="newTabsetNameSubmit"
-                 @click="emits('importBookmarks',{
+      <q-card-actions align="right" class="text-primary">
+        <q-btn label="Cancel" size="sm" color="accent" v-close-popup/>
+        <q-btn type="submit" label="Create new Tabset" color="warning" size="sm"
+               data-testid="newTabsetNameSubmit"
+               @click="emits('importBookmarks',{
                    bmId: props.bmId,
                    recursive: recursive,
                    tsName: newTabsetName
                  })"
-                 :disable="!isValid" v-close-popup/>
-        </q-card-actions>
-      </q-card>
-<!--    </q-form>-->
+               :disable="!isValid" v-close-popup/>
+      </q-card-actions>
+    </q-card>
+    <!--    </q-form>-->
   </div>
 
 </template>
@@ -55,21 +55,13 @@
 <script lang="ts" setup>
 
 import {ref} from "vue";
-import {QForm, useDialogPluginComponent, useQuasar} from "quasar";
-import ChromeApi from "src/app/BrowserApi";
-import {useBookmarksStore} from "src/bookmarks/stores/bookmarksStore";
-import {useCommandExecutor} from "src/core/services/CommandExecutor";
-import {CreateTabsetFromBookmarksCommand} from "src/domain/tabsets/CreateTabsetFromBookmarks";
+import {QForm, useDialogPluginComponent} from "quasar";
 import {Tabset, TABSET_NAME_MAX_LENGTH} from "src/tabsets/models/Tabset";
-import _ from "lodash"
-import {useTabsetService} from "src/tabsets/services/TabsetService2";
-import {useUtils} from "src/core/services/Utils";
 import {useTabsetsStore} from "src/tabsets/stores/tabsetsStore";
-import {useRouter} from "vue-router";
 
 const emits = defineEmits([
-  ...useDialogPluginComponent.emits,
-].concat(['importBookmarks']))
+  ...useDialogPluginComponent.emits, "importBookmarks"
+])
 
 const props = defineProps({
   inSidePanel: {type: Boolean, default: false},

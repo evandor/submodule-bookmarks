@@ -14,7 +14,7 @@
 
         <BookmarkListElementWidget
           :in-side-panel="true"
-          :key="props.group + '__' + bm.id" :bookmark="bm" :highlightUrl="highlightUrl"/>
+          :key="props.group + '__' + bm.id" :bookmark="bm!" :highlightUrl="highlightUrl!"/>
 
       </q-item>
     </vue-draggable-next>
