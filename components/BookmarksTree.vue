@@ -58,7 +58,9 @@
             </q-icon>
         </span>
         <span class="text-right" style="width:25px;" v-if="nodeActionsContain('import')">
-            <q-icon name="upload_file" color="primary" size="18px" @click.stop="importFrom(prop.node)">
+            <q-icon :name="imported(prop.node) ? 'check':'upload_file'"
+                    :color="imported(prop.node) ? 'positive':'primary'"
+                    size="18px" @click.stop="importFrom(prop.node)">
               <q-tooltip>Import</q-tooltip>
             </q-icon>
         </span>
@@ -131,7 +133,7 @@ const props = defineProps({
   nodes: {type: Object as PropType<TreeNode[]>, required: true}
 })
 
-const emits = defineEmits(['toggleShowOnlyFolders','imported'])
+const emits = defineEmits(['toggleShowOnlyFolders', 'imported'])
 
 onMounted(() => {
   showOnlyFolders.value = props.showOnlyFolders
@@ -228,13 +230,17 @@ const importFrom = (node: TreeNode) => {
       inSidePanel: true
     }
   })
-    .onOk((a:ExecutionResult<object>) => {
-      console.log("a", a)
+    .onOk((a: any) => {
+      console.log("ExecutionResult", a)
       //useTabsetsStore().selectCurrentTabset()
       //router.push("/sidepanel")
       emits('imported', a)
     })
+}
 
+const imported = (node: TreeNode) => {
+  const imported: string[] = useUiStore().importedBookmarks
+  return imported.indexOf(node.id) >= 0
 }
 
 </script>

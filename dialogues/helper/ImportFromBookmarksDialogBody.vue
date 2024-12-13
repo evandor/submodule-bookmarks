@@ -71,7 +71,6 @@ const props = defineProps({
   count: {type: Number, default: 0}
 })
 
-// @ts-ignore
 const {dialogRef, onDialogHide, onDialogCancel} = useDialogPluginComponent()
 
 const theForm = ref<QForm>(null as unknown as QForm)
