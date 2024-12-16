@@ -126,15 +126,15 @@ watchEffect(() => {
 })
 
 async function getParentChain(bookmarkId: string, chain: Bookmark[] = []): Promise<Bookmark[]> {
-  // @ts-ignore
+  // @ts-expect-error
   const results = await chrome.bookmarks.get(bookmarkId)
-  // @ts-ignore
+  // @ts-expect-error
   if (results && results[0]) {
     chain.push(new Bookmark(uid(), results[0]))
-    // @ts-ignore
+    // @ts-expect-error
     const parentId = results[0].parentId
     if (parentId && parentId !== "0") {
-      // @ts-ignore
+      // @ts-expect-error
       chain = getParentChain(parentId, chain)
     }
   }

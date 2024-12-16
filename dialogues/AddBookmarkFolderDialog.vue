@@ -44,7 +44,7 @@ const props = defineProps({
   parentFolderId: {type: String, required: true}
 })
 
-// @ts-ignore
+// @ts-expect-error
 const {dialogRef, onDialogHide, onDialogOK, onDialogCancel} = useDialogPluginComponent()
 const folderName = ref('')
 

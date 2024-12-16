@@ -107,11 +107,11 @@ export const useBookmarksStore = defineStore('bookmarks', {
       this.nonLeafNodes = []
       this.bookmarksLeaves = []
       //console.debug(" ...loading bookmarks")//, (new Error()).stack)
-      // @ts-ignore
+      // @ts-expect-error
       const bookmarks: chrome.bookmarks.BookmarkTreeNode[] = await chrome.bookmarks.search({})//, async (bookmarks) => {
       this.bookmarksLeaves = bookmarks
 
-      // @ts-ignore
+      // @ts-expect-error
       const tree: chrome.bookmarks.BookmarkTreeNode[] = await chrome.bookmarks.getTree()
 
       const tni:TreeNodeInfo = nodesFrom(tree[0]!)
