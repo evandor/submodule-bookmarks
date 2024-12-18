@@ -147,7 +147,6 @@ watchEffect(() => {
 watch(() => selected.value, async (currentValue, oldValue) => {
   if (currentValue !== oldValue) {
     try {
-      // @ts-expect-error
       const result = await chrome.bookmarks.get(currentValue)
       console.log("selected ==>", currentValue, oldValue, result)
       if (result && result.length > 0 && result[0]!.url) {
@@ -207,7 +206,7 @@ const bookmarksFilter = (node: any, filter: string) => {
 const resetFilter = () => {
   filter.value = ''
   if (filterRef.value) {
-    // @ts-expect-error
+    // @ts-expect-error TODO
     filterRef.value.focus()
   }
 }

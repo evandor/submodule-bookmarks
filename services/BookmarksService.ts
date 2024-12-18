@@ -23,7 +23,6 @@ class BookmarksService {
 
   async createBookmarkFolder(folderName: string, parentFolderId: string): Promise<chrome.bookmarks.BookmarkTreeNode> {
     console.log("createing folder", folderName, parentFolderId)
-    // @ts-expect-error
     const res: chrome.bookmarks.BookmarkTreeNode = await chrome.bookmarks.create({
       title: folderName,
       parentId: parentFolderId
