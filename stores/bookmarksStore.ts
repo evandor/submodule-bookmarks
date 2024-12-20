@@ -13,7 +13,7 @@ function nodesFrom(
   const parentNode = new TreeNode(parent.id, parent.title, parent.title, parent.url, parent.url ? 'o_article' : 'o_folder', [], level,0, 0)
 
   level++
-  let subNodes: TreeNode[] = []
+  const subNodes: TreeNode[] = []
   let foldersCount = 0
   let leavesCount = 0
   if (parent.children) {
@@ -115,8 +115,8 @@ export const useBookmarksStore = defineStore('bookmarks', {
       const tni:TreeNodeInfo = nodesFrom(tree[0]!)
       if (tni.treeNode) {
         this.bookmarksNodes2 = tni.treeNode.children
-        let copy:TreeNode = (JSON.parse(JSON.stringify(tni.treeNode)));
-        console.log("copy", copy)
+        const copy:TreeNode = (JSON.parse(JSON.stringify(tni.treeNode)));
+        //console.log("copy", copy)
         this.nonLeafNodes = nodesWithoutLeaves(copy)?.children || []
       }
       this.foldersCount = tni.folderCount
