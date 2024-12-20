@@ -4,13 +4,13 @@
 
     <template v-slot:actions>
 
-      <q-btn v-if="nonFolders().length > 0"
-             flat dense icon="upload_file"
-             color="primary" :label="$q.screen.gt.lg ? 'Import as Tabset...' : ''"
-             class="q-mr-sm"
-             @click="importBookmarks">
-        <q-tooltip>Import these bookmarks as Tabset</q-tooltip>
-      </q-btn>
+<!--      <q-btn v-if="nonFolders().length > 0"-->
+<!--             flat dense icon="upload_file"-->
+<!--             color="primary" :label="$q.screen.gt.lg ? 'Import as Tabset...' : ''"-->
+<!--             class="q-mr-sm"-->
+<!--             @click="importBookmarks">-->
+<!--        <q-tooltip>Import these bookmarks as Tabset</q-tooltip>-->
+<!--      </q-btn>-->
 
       <q-btn
         flat dense icon="o_add"
