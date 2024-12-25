@@ -21,9 +21,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { QForm, useDialogPluginComponent } from 'quasar'
 import BookmarksService from 'src/bookmarks/services/BookmarksService'
+import { ref } from 'vue'
 
 defineEmits([...useDialogPluginComponent.emits])
 

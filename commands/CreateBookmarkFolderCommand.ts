@@ -1,6 +1,6 @@
+import BookmarksService from 'src/bookmarks/services/BookmarksService'
 import Command from 'src/core/domain/Command'
 import { ExecutionResult } from 'src/core/domain/ExecutionResult'
-import BookmarksService from 'src/bookmarks/services/BookmarksService'
 
 // class UndoCreateTabsetCommand implements Command<object> {
 //

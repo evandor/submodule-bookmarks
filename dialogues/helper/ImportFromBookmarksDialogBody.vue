@@ -67,10 +67,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { QForm, useDialogPluginComponent } from 'quasar'
 import { Tabset, TABSET_NAME_MAX_LENGTH } from 'src/tabsets/models/Tabset'
 import { useTabsetsStore } from 'src/tabsets/stores/tabsetsStore'
+import { ref } from 'vue'
 
 const emits = defineEmits([...useDialogPluginComponent.emits, 'importBookmarks'])
 

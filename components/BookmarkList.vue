@@ -25,10 +25,10 @@
 </template>
 
 <script setup lang="ts">
+import BookmarkListElementWidget from 'components/widgets/BookmarkListElementWidget.vue'
 import { Bookmark } from 'src/bookmarks/models/Bookmark'
 import { PropType } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
-import BookmarkListElementWidget from 'components/widgets/BookmarkListElementWidget.vue'
 
 const props = defineProps({
   bookmarks: { type: Array as PropType<Array<Bookmark>>, required: true },

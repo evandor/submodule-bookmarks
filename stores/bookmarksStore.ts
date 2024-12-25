@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
 import _ from 'lodash'
+import { defineStore } from 'pinia'
 import { Bookmark } from 'src/bookmarks/models/Bookmark'
 import { TreeNode } from 'src/bookmarks/models/Tree'
 import { TreeNodeInfo } from 'src/bookmarks/models/TreeNodeInfo'

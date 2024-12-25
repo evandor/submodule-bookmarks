@@ -79,14 +79,14 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router'
-import { uid } from 'quasar'
 import _ from 'lodash'
-import { useBookmarksStore } from 'src/bookmarks/stores/bookmarksStore'
-import { Bookmark } from 'src/bookmarks/models/Bookmark'
-import { onMounted, ref, watchEffect } from 'vue'
+import { uid } from 'quasar'
 import BookmarkList from 'src/bookmarks/components/BookmarkList.vue'
+import { Bookmark } from 'src/bookmarks/models/Bookmark'
+import { useBookmarksStore } from 'src/bookmarks/stores/bookmarksStore'
 import Analytics from 'src/core/utils/google-analytics'
+import { onMounted, ref, watchEffect } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
 const props = defineProps({
   inSidePanel: { type: Boolean, default: false },

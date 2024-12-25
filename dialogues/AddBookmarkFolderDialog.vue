@@ -35,11 +35,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-
 import { useDialogPluginComponent } from 'quasar'
-import { useCommandExecutor } from 'src/core/services/CommandExecutor'
 import { CreateBookmarkFolderCommand } from 'src/bookmarks/commands/CreateBookmarkFolderCommand'
+import { useCommandExecutor } from 'src/core/services/CommandExecutor'
+import { ref } from 'vue'
 
 defineEmits([...useDialogPluginComponent.emits])
 

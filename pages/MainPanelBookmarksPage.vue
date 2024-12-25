@@ -37,17 +37,17 @@
 </template>
 
 <script lang="ts" setup>
-import BookmarksPage from 'src/bookmarks/pages/BookmarksPage.vue'
-import { onMounted, ref } from 'vue'
-import Analytics from 'src/core/utils/google-analytics'
-import AddBookmarkFolderDialog from 'src/bookmarks/dialogues/AddBookmarkFolderDialog.vue'
-import { useBookmarksStore } from 'src/bookmarks/stores/bookmarksStore'
-import { useQuasar } from 'quasar'
-import { useRouter } from 'vue-router'
-import BookmarksService from 'src/bookmarks/services/BookmarksService'
-import { Bookmark } from 'src/bookmarks/models/Bookmark'
 import _ from 'lodash'
+import { useQuasar } from 'quasar'
+import AddBookmarkFolderDialog from 'src/bookmarks/dialogues/AddBookmarkFolderDialog.vue'
 import ImportFromBookmarksDialog from 'src/bookmarks/dialogues/ImportFromBookmarksDialog.vue'
+import { Bookmark } from 'src/bookmarks/models/Bookmark'
+import BookmarksPage from 'src/bookmarks/pages/BookmarksPage.vue'
+import BookmarksService from 'src/bookmarks/services/BookmarksService'
+import { useBookmarksStore } from 'src/bookmarks/stores/bookmarksStore'
+import Analytics from 'src/core/utils/google-analytics'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const $q = useQuasar()
 const bookmarksStore = useBookmarksStore()

@@ -103,21 +103,21 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { onMounted, PropType, ref, watch, watchEffect } from 'vue'
 import { uid, useQuasar } from 'quasar'
-import { useBookmarksStore } from 'src/bookmarks/stores/bookmarksStore'
-import NavigationService from 'src/services/NavigationService'
-import DeleteBookmarkFolderDialog from 'src/bookmarks/dialogues/DeleteBookmarkFolderDialog.vue'
-import { useUtils } from 'src/core/services/Utils'
-import { useUiStore } from 'src/ui/stores/uiStore'
-import { useTabsStore } from 'src/bookmarks/stores/tabsStore'
-import { useCommandExecutor } from 'src/core/services/CommandExecutor'
 import { CreateBookmarkCommand } from 'src/bookmarks/commands/CreateBookmarkCommand'
-import { TreeNode } from 'src/bookmarks/models/Tree'
-import { Bookmark } from 'src/bookmarks/models/Bookmark'
+import DeleteBookmarkFolderDialog from 'src/bookmarks/dialogues/DeleteBookmarkFolderDialog.vue'
 import ImportFromBookmarksDialog from 'src/bookmarks/dialogues/ImportFromBookmarksDialog.vue'
+import { Bookmark } from 'src/bookmarks/models/Bookmark'
+import { TreeNode } from 'src/bookmarks/models/Tree'
+import { useBookmarksStore } from 'src/bookmarks/stores/bookmarksStore'
+import { useTabsStore } from 'src/bookmarks/stores/tabsStore'
 import { ExecutionResult } from 'src/core/domain/ExecutionResult'
+import { useCommandExecutor } from 'src/core/services/CommandExecutor'
+import { useUtils } from 'src/core/services/Utils'
+import NavigationService from 'src/services/NavigationService'
+import { useUiStore } from 'src/ui/stores/uiStore'
+import { onMounted, PropType, ref, watch, watchEffect } from 'vue'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const bookmarksStore = useBookmarksStore()
