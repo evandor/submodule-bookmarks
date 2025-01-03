@@ -46,11 +46,7 @@ function nodesFrom(
   parentNode.subFoldersCount = foldersCount
   parentNode.subNodesCount = leavesCount
   parentNode.header = parentNode.getHeader()
-  return new TreeNodeInfo(
-    parentNode,
-    allFoldersCount + foldersCount,
-    allBookmarksCount + leavesCount,
-  )
+  return new TreeNodeInfo(parentNode, allFoldersCount + foldersCount, allBookmarksCount + leavesCount)
 }
 
 function nodesWithoutLeaves(parent: TreeNode): TreeNode | undefined {

@@ -4,9 +4,7 @@
 
     <q-card style="min-width: 300px">
       <q-card-section>
-        <div class="text-h6" v-if="props.foldersCount === 0">
-          Import these {{ props.count }} Bookmarks as Tabset
-        </div>
+        <div class="text-h6" v-if="props.foldersCount === 0">Import these {{ props.count }} Bookmarks as Tabset</div>
         <div class="text-h6" v-else>Import Bookmarks recursively</div>
       </q-card-section>
 
@@ -20,14 +18,11 @@
           autofocus
           @update:model-value="(val) => checkIsValid()"
           :rules="[
+            (val: string) => Tabset.newTabsetNameIsValid(val) || 'Please do not use special Characters',
             (val: string) =>
-              Tabset.newTabsetNameIsValid(val) || 'Please do not use special Characters',
-            (val: string) =>
-              Tabset.newTabsetNameIsShortEnough(val) ||
-              'the maximum length is ' + TABSET_NAME_MAX_LENGTH,
+              Tabset.newTabsetNameIsShortEnough(val) || 'the maximum length is ' + TABSET_NAME_MAX_LENGTH,
           ]"
-          data-testid="newTabsetName"
-        />
+          data-testid="newTabsetName" />
 
         <template v-if="props.foldersCount > 0">
           <q-checkbox v-model="recursive" label="Recursively" />&nbsp;
@@ -58,8 +53,7 @@
             })
           "
           :disable="!isValid"
-          v-close-popup
-        />
+          v-close-popup />
       </q-card-actions>
     </q-card>
     <!--    </q-form>-->

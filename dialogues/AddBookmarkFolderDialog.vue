@@ -10,13 +10,7 @@
 
       <q-card-section class="q-pt-none">
         <div class="text-body">Name:</div>
-        <q-input
-          dense
-          v-model="folderName"
-          data-testid="add_folder_input"
-          autofocus
-          @keyup.enter="createNewFolder()"
-        />
+        <q-input dense v-model="folderName" data-testid="add_folder_input" autofocus @keyup.enter="createNewFolder()" />
       </q-card-section>
 
       <q-card-actions align="right" class="text-primary">
@@ -27,8 +21,7 @@
           data-testid="add_folder_submit"
           :disable="folderName.trim().length === 0"
           v-close-popup
-          @click="createNewFolder()"
-        />
+          @click="createNewFolder()" />
       </q-card-actions>
     </q-card>
   </q-dialog>
@@ -50,9 +43,7 @@ const { dialogRef, onDialogHide, onDialogOK, onDialogCancel } = useDialogPluginC
 const folderName = ref('')
 
 const createNewFolder = () => {
-  useCommandExecutor().execute(
-    new CreateBookmarkFolderCommand(folderName.value, props.parentFolderId),
-  )
+  useCommandExecutor().execute(new CreateBookmarkFolderCommand(folderName.value, props.parentFolderId))
   onDialogOK()
 }
 </script>

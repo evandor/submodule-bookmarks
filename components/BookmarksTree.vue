@@ -11,8 +11,7 @@
           ref="filterRef"
           filled
           v-model="filter"
-          :label="showOnlyFolders ? 'Filter Bookmark Folders' : 'Filter Bookmarks and Folders'"
-        >
+          :label="showOnlyFolders ? 'Filter Bookmark Folders' : 'Filter Bookmarks and Folders'">
           <template v-slot:append>
             <q-icon v-if="filter !== ''" name="clear" class="cursor-pointer" @click="resetFilter" />
           </template>
@@ -32,34 +31,25 @@
       node-key="id"
       @mouseenter="entered(true)"
       @mouseleave="entered(false)"
-      v-model:selected="selected"
-    >
+      v-model:selected="selected">
       <!--        v-model:expanded="useNotificationsStore().bookmarksExpanded">-->
       <template v-slot:header-node="prop">
         <q-icon name="o_folder" color="warning" class="q-mr-sm" />
         <span class="cursor-pointer fit no-wrap ellipsis"
           >{{ prop.node.label }}
-          <span style="font-size: smaller" class="text-grey">
-            ({{ prop.node.subNodesCount }})
-          </span>
+          <span style="font-size: smaller" class="text-grey"> ({{ prop.node.subNodesCount }}) </span>
         </span>
 
         <span
           class="text-right"
           v-if="nodeActionsContain('add') && mouseHover && prop.node.id === deleteButtonId"
-          style="width: 25px"
-        >
+          style="width: 25px">
           <q-icon name="add" color="positive" size="18px" @click.stop="addCurrentTab">
             <q-tooltip>Add current tab</q-tooltip>
           </q-icon>
         </span>
         <span class="text-right" style="width: 25px" v-if="nodeActionsContain('delete')">
-          <q-icon
-            name="delete_outline"
-            color="negative"
-            size="18px"
-            @click.stop="deleteBookmarksFolderDialog"
-          >
+          <q-icon name="delete_outline" color="negative" size="18px" @click.stop="deleteBookmarksFolderDialog">
             <q-tooltip>Delete this folder</q-tooltip>
           </q-icon>
         </span>
@@ -68,31 +58,16 @@
             :name="imported(prop.node) ? 'check' : 'upload_file'"
             :color="imported(prop.node) ? 'positive' : 'primary'"
             size="18px"
-            @click.stop="importFrom(prop.node)"
-          >
+            @click.stop="importFrom(prop.node)">
             <q-tooltip>Import</q-tooltip>
           </q-icon>
         </span>
       </template>
       <template v-slot:header-leaf="prop">
-        <q-img
-          class="rounded-borders q-mr-sm"
-          width="23px"
-          height="23px"
-          :src="favIconFromUrl(prop.node.url)"
-        />
+        <q-img class="rounded-borders q-mr-sm" width="23px" height="23px" :src="favIconFromUrl(prop.node.url)" />
         <span class="cursor-pointer fit no-wrap ellipsis">{{ prop.node.label }}</span>
-        <span
-          class="text-right"
-          v-if="mouseHover && prop.node.id === deleteButtonId"
-          style="width: 25px"
-        >
-          <q-icon
-            name="delete_outline"
-            color="negative"
-            size="18px"
-            @click.stop="deleteBookmark(prop.node.id)"
-          >
+        <span class="text-right" v-if="mouseHover && prop.node.id === deleteButtonId" style="width: 25px">
+          <q-icon name="delete_outline" color="negative" size="18px" @click.stop="deleteBookmark(prop.node.id)">
             <q-tooltip>Delete this Bookmark</q-tooltip>
           </q-icon>
         </span>
@@ -180,10 +155,7 @@ watch(
             : router.push('/bookmarks/' + selected.value)
         }
       } catch (err) {
-        console.log(
-          `catched error for 'selected' watch, currentValue=${currentValue}, oldValue=${oldValue}`,
-          err,
-        )
+        console.log(`catched error for 'selected' watch, currentValue=${currentValue}, oldValue=${oldValue}`, err)
         if (chrome.runtime.lastError) {
           console.warn('got runtime error', chrome.runtime.lastError)
         }

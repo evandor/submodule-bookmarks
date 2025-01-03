@@ -14,8 +14,7 @@
                   props.inSidePanel
                     ? router.push('/mainpanel/bookmarks/' + bm.chromeBookmark.id)
                     : router.push('/bookmarks/' + bm.chromeBookmark.id)
-                "
-              />
+                " />
             </q-breadcrumbs>
           </span>
         </div>
@@ -45,8 +44,7 @@
           :parent="bookmarkId"
           group="bookmarkFolders"
           :bookmarks="folders()"
-          :in-side-panel="props.inSidePanel"
-        />
+          :in-side-panel="props.inSidePanel" />
       </q-card-section>
     </q-card>
   </q-expansion-item>
@@ -57,8 +55,7 @@
       <q-item-section>
         <div>
           <span class="text-weight-bold"
-            >{{ nonFolders().length }}
-            {{ nonFolders().length === 1 ? 'Bookmark' : 'Bookmarks' }}</span
+            >{{ nonFolders().length }} {{ nonFolders().length === 1 ? 'Bookmark' : 'Bookmarks' }}</span
           >
           <div class="text-caption ellipsis">bookmarks of current folder</div>
         </div>
@@ -71,8 +68,7 @@
           :parent="bookmarkId"
           :bookmarks="nonFolders()"
           :highlightId="highlightId"
-          :in-side-panel="props.inSidePanel"
-        />
+          :in-side-panel="props.inSidePanel" />
       </q-card-section>
     </q-card>
   </q-expansion-item>
@@ -142,17 +138,13 @@ watchEffect(() => {
       }
     })
     chrome.bookmarks.getChildren(bookmarkId.value, (bms: chrome.bookmarks.BookmarkTreeNode[]) => {
-      bookmarksForFolder.value = _.map(
-        bms,
-        (l: chrome.bookmarks.BookmarkTreeNode) => new Bookmark(uid(), l),
-      )
+      bookmarksForFolder.value = _.map(bms, (l: chrome.bookmarks.BookmarkTreeNode) => new Bookmark(uid(), l))
       useBookmarksStore().bookmarksForFolder = bookmarksForFolder.value
     })
   }
 })
 
-const folders = (): Bookmark[] =>
-  _.filter(bookmarksStore.bookmarksForFolder, (bm: Bookmark) => !bm.chromeBookmark.url)
+const folders = (): Bookmark[] => _.filter(bookmarksStore.bookmarksForFolder, (bm: Bookmark) => !bm.chromeBookmark.url)
 const nonFolders = (): Bookmark[] =>
   _.filter(bookmarksStore.bookmarksForFolder, (bm: Bookmark) => !!bm.chromeBookmark.url)
 </script>

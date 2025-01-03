@@ -7,8 +7,8 @@
         </q-card-section>
         <q-card-section class="q-pt-none">
           <div class="text-body">
-            Would you like to delete this folder (and potentially all its subfolders and bookmarks)?
-            This cannot be undone.
+            Would you like to delete this folder (and potentially all its subfolders and bookmarks)? This cannot be
+            undone.
           </div>
         </q-card-section>
         <q-card-actions align="right" class="text-primary">

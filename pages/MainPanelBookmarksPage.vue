@@ -16,8 +16,7 @@
         color="primary"
         :label="$q.screen.gt.lg ? 'Add Folder...' : ''"
         class="q-mr-md"
-        @click="addUrlDialog"
-      >
+        @click="addUrlDialog">
         <q-tooltip>Create a new Bookmark Folder</q-tooltip>
       </q-btn>
 
@@ -28,8 +27,7 @@
         color="negative"
         :label="$q.screen.gt.lg ? 'Delete Folder...' : ''"
         class="q-mr-md"
-        @click="deleteBookmarkFolder"
-      >
+        @click="deleteBookmarkFolder">
         <q-tooltip>Delete this Bookmark Folder</q-tooltip>
       </q-btn>
     </template>
@@ -59,8 +57,7 @@ onMounted(() => {
   Analytics.firePageViewEvent('MainPanelBookmarksPage', document.location.href)
 })
 
-const folders = (): Bookmark[] =>
-  _.filter(bookmarksStore.bookmarksForFolder, (bm: Bookmark) => !bm.chromeBookmark.url)
+const folders = (): Bookmark[] => _.filter(bookmarksStore.bookmarksForFolder, (bm: Bookmark) => !bm.chromeBookmark.url)
 const nonFolders = (): Bookmark[] =>
   _.filter(bookmarksStore.bookmarksForFolder, (bm: Bookmark) => !!bm.chromeBookmark.url)
 

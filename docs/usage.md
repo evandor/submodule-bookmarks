@@ -21,13 +21,7 @@ Also, in the hosting app, you have to define the "AppFeatures":
 ```typescript
 export class AppFeatures {
   features: Feature[] = [
-    new Feature(
-      FeatureIdent.STANDALONE_APP,
-      FeatureType.RECOMMENDED,
-      'Standalone App',
-      'o_open_in_new',
-      ['bex'],
-    ),
+    new Feature(FeatureIdent.STANDALONE_APP, FeatureType.RECOMMENDED, 'Standalone App', 'o_open_in_new', ['bex']),
     //(...)
   ]
 }

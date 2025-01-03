@@ -4,21 +4,18 @@
       class="dragArea list-group w-full"
       :list="props.bookmarks"
       :group="{ name: 'tabs', pull: 'clone' }"
-      @change="handleDragAndDrop"
-    >
+      @change="handleDragAndDrop">
       <q-item
         clickable
         v-ripple
         v-for="bm in props.bookmarks"
         :style="checkHighlighting(bm)"
-        :key="props.group + '_' + bm.id"
-      >
+        :key="props.group + '_' + bm.id">
         <BookmarkListElementWidget
           :in-side-panel="true"
           :key="props.group + '__' + bm.id"
           :bookmark="bm!"
-          :highlightUrl="highlightUrl!"
-        />
+          :highlightUrl="highlightUrl!" />
       </q-item>
     </vue-draggable-next>
   </q-list>

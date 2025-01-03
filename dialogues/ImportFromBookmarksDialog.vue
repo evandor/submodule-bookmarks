@@ -6,8 +6,7 @@
       :foldersCount="props.foldersCount"
       :bmId="props.bmId"
       :bmTitle="props.bmTitle"
-      :count="props.count"
-    />
+      :count="props.count" />
   </q-dialog>
 </template>
 
