@@ -5,7 +5,7 @@ const { inBexMode } = useUtils()
 
 class BookmarksService {
   async init() {
-    console.debug(' ...initializing BookmarksService', '✅')
+    // console.debug(' ...initializing BookmarksService', '✅')
     if (inBexMode()) {
       useBookmarksStore()
         .loadBookmarks()

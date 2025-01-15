@@ -23,7 +23,7 @@ export const useTabsStore = defineStore('browsertabs', () => {
   }
 
   async function initialize() {
-    console.debug(' ...initializing tabsStore')
+    // console.debug(' ...initializing tabsStore')
     initListeners()
   }
 
@@ -32,7 +32,7 @@ export const useTabsStore = defineStore('browsertabs', () => {
   }
 
   function initListeners() {
-    console.debug(' ...initializing tabsStore Listeners')
+    // console.debug(' ...initializing tabsStore Listeners')
     //chrome.tabs.onUpdated.addListener(onTabUpdatedListener)
     chrome.tabs.onActivated.addListener(onTabActivatedListener)
   }
