@@ -26,5 +26,5 @@ export class CreateBookmarkCommand implements Command<object> {
 }
 
 CreateBookmarkCommand.prototype.toString = function cmdToString() {
-  return `CreateBookmarkCommand: {tab=${this.tab}, folderId=${this.folderId}}`
+  return `CreateBookmarkCommand: {tabId=${this.tab.id}, folderId=${this.folderId}}`
 }
