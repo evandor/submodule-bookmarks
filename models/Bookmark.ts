@@ -4,7 +4,7 @@ export class Bookmark {
   updated: number
   lastActive: number
   activatedCount: number
-  loadedCount: number
+  // loadedCount: number
   chromeBookmark: chrome.bookmarks.BookmarkTreeNode
   selected: boolean = false
   name: string | undefined
@@ -17,7 +17,7 @@ export class Bookmark {
     this.updated = new Date().getTime()
     this.lastActive = 0
     this.activatedCount = 0
-    this.loadedCount = 0
+    // this.loadedCount = 0
     this.chromeBookmark = chromeBookmark
     this.name = undefined
   }
