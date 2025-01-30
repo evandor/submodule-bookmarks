@@ -1,10 +1,13 @@
 import { defineStore } from 'pinia'
+import { useUtils } from 'src/core/services/Utils'
 import { ref } from 'vue'
 
 /**
  * a pinia store for "browsertabs".
  */
 export const useTabsStore = defineStore('browsertabs', () => {
+  const { addListenerOnce } = useUtils()
+
   const currentChromeTab = ref<chrome.tabs.Tab | undefined>(undefined)
 
   // const onTabUpdatedListener = async (tabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
@@ -33,8 +36,7 @@ export const useTabsStore = defineStore('browsertabs', () => {
 
   function initListeners() {
     // console.debug(' ...initializing tabsStore Listeners')
-    //chrome.tabs.onUpdated.addListener(onTabUpdatedListener)
-    chrome.tabs.onActivated.addListener(onTabActivatedListener)
+    addListenerOnce(chrome.tabs.onActivated, onTabActivatedListener)
   }
 
   return {
