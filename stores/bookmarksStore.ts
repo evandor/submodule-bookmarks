@@ -92,8 +92,10 @@ export const useBookmarksStore = defineStore('bookmarks', {
   getters: {
     findBookmarksForUrl: (state) => {
       return async (url: string): Promise<chrome.bookmarks.BookmarkTreeNode[]> => {
-        const res = await chrome.bookmarks.search({ url: url })
-        return res
+        if (chrome.bookmarks) {
+          return await chrome.bookmarks.search({ url: url })
+        }
+        return Promise.resolve([])
       }
     },
   },
@@ -147,6 +149,14 @@ export const useBookmarksStore = defineStore('bookmarks', {
           })
         })
       })
+    },
+
+    async deleteByUrl(url: string): Promise<number> {
+      const bms = await this.findBookmarksForUrl(url)
+      bms.forEach((treeNode: chrome.bookmarks.BookmarkTreeNode) => {
+        console.log('about to delete', treeNode)
+      })
+      return bms.length
     },
   },
 })

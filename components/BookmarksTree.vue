@@ -145,14 +145,16 @@ watch(
         } else {
           // we've got a folder
           useBookmarksStore().currentFolder = result[0]!
-          props.inSidePanel
-            ? NavigationService.openOrCreateTab(
-                [chrome.runtime.getURL('/www/index.html#/mainpanel/bookmarks/' + selected.value)],
-                undefined,
-                [],
-                true,
-              )
-            : router.push('/bookmarks/' + selected.value)
+          if (props.inSidePanel) {
+            NavigationService.openOrCreateTab(
+              [chrome.runtime.getURL('/www/index.html#/mainpanel/bookmarks/' + selected.value)],
+              undefined,
+              [],
+              true,
+            )
+          } else {
+            router.push('/bookmarks/' + selected.value)
+          }
         }
       } catch (err) {
         console.log(`catched error for 'selected' watch, currentValue=${currentValue}, oldValue=${oldValue}`, err)
