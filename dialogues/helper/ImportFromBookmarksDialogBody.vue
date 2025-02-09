@@ -45,13 +45,7 @@
           color="warning"
           size="sm"
           data-testid="newTabsetNameSubmit"
-          @click="
-            emits('importBookmarks', {
-              bmId: props.bmId,
-              recursive: recursive,
-              tsName: newTabsetName,
-            })
-          "
+          @click="createTabset()"
           :disable="!isValid"
           v-close-popup />
       </q-card-actions>
@@ -96,5 +90,13 @@ const checkIsValid = () => {
       isValid.value = res
     })
   }
+}
+
+const createTabset = () => {
+  emits('importBookmarks', {
+    bmId: props.bmId,
+    recursive: recursive.value,
+    tsName: newTabsetName.value,
+  })
 }
 </script>

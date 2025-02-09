@@ -155,6 +155,7 @@ export const useBookmarksStore = defineStore('bookmarks', {
       const bms = await this.findBookmarksForUrl(url)
       bms.forEach((treeNode: chrome.bookmarks.BookmarkTreeNode) => {
         console.log('about to delete', treeNode)
+        chrome.bookmarks.remove(treeNode.id)
       })
       return bms.length
     },
