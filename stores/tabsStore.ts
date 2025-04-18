@@ -36,6 +36,7 @@ export const useTabsStore = defineStore('browsertabs', () => {
 
   function initListeners() {
     // console.debug(' ...initializing tabsStore Listeners')
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     addListenerOnce(chrome.tabs.onActivated, onTabActivatedListener)
   }
 
