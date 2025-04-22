@@ -22,8 +22,8 @@
 </template>
 
 <script setup lang="ts">
-import BookmarkListElementWidget from 'components/widgets/BookmarkListElementWidget.vue'
 import { Bookmark } from 'src/bookmarks/models/Bookmark'
+import BookmarkListElementWidget from 'src/core/components/widgets/BookmarkListElementWidget.vue'
 import { PropType } from 'vue'
 import { VueDraggableNext } from 'vue-draggable-next'
 
