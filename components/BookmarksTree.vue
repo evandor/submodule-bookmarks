@@ -85,7 +85,7 @@ import ImportFromBookmarksDialog from 'src/bookmarks/dialogues/ImportFromBookmar
 import { Bookmark } from 'src/bookmarks/models/Bookmark'
 import { TreeNode } from 'src/bookmarks/models/Tree'
 import { useBookmarksStore } from 'src/bookmarks/stores/bookmarksStore'
-import { useTabsStore } from 'src/bookmarks/stores/tabsStore'
+import { useBookmarksTabsStore } from 'src/bookmarks/stores/bookmarksTabsStore'
 import { ExecutionResult } from 'src/core/domain/ExecutionResult'
 import { useCommandExecutor } from 'src/core/services/CommandExecutor'
 import { useUtils } from 'src/core/services/Utils'
@@ -186,7 +186,7 @@ const deleteBookmarksFolderDialog = () => {
 }
 
 const addCurrentTab = async () => {
-  const currentTab = useTabsStore().currentChromeTab
+  const currentTab = useBookmarksTabsStore().currentChromeTab
   if (currentTab) {
     await useCommandExecutor().executeFromUi(new CreateBookmarkCommand(currentTab, selected.value))
   }

@@ -5,7 +5,7 @@ import { ref } from 'vue'
 /**
  * a pinia store for "browsertabs".
  */
-export const useTabsStore = defineStore('browsertabs', () => {
+export const useBookmarksTabsStore = defineStore('bookmarksBrowsertabs', () => {
   const { addListenerOnce } = useUtils()
 
   const currentChromeTab = ref<chrome.tabs.Tab | undefined>(undefined)
