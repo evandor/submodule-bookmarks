@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0f3531eb-2a5e-4657-b68e-471292c621b4" name="Changes" comment="automerge on commit for different versions" />
+    <list default="true" id="0f3531eb-2a5e-4657-b68e-471292c621b4" name="Changes" comment="only main branch now, no chrome or firefox or whatever" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,12 +19,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "evandor"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;evandor&quot;
   }
-}]]></component>
+}</component>
   <component name="GitToolBoxStore">
     <option name="projectConfigVersion" value="5" />
     <option name="recentBranches">
@@ -59,15 +59,15 @@
       </RecentBranches>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/evandor/submodule-bookmarks.git",
-    "accountId": "460f878d-ffa1-4668-9f22-3ac3ebfd8020"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/evandor/submodule-bookmarks.git&quot;,
+    &quot;accountId&quot;: &quot;460f878d-ffa1-4668-9f22-3ac3ebfd8020&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2fGudVZJqKhrP58qf3pXs3gNfke" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="false" id="Update" />
@@ -80,6 +80,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/carstengraef/projects/github/submodule-bookmarks/.github/workflows",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -145,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713450710940</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="only main branch now, no chrome or firefox or whatever">
+      <option name="closed" value="true" />
+      <created>1725098372903</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1725098372903</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -156,6 +165,7 @@
     <MESSAGE value="initial" />
     <MESSAGE value="renaming in submodule" />
     <MESSAGE value="automerge on commit for different versions" />
-    <option name="LAST_COMMIT_MESSAGE" value="automerge on commit for different versions" />
+    <MESSAGE value="only main branch now, no chrome or firefox or whatever" />
+    <option name="LAST_COMMIT_MESSAGE" value="only main branch now, no chrome or firefox or whatever" />
   </component>
 </project>
